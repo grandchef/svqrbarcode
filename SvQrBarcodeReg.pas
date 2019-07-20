@@ -3,8 +3,7 @@ unit SvQrBarcodeReg;
 {$I SvQrBarcode.inc}
 
 interface
-uses Classes,
-     {$IFDEF D6}DesignIntf, DesignEditors{$ELSE}Dsgnintf{$ENDIF};
+uses Classes, DesignIntf, DesignEditors;
 
   type
     {Object Inspector - generic editor for data field names}

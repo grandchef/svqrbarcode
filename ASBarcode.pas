@@ -323,11 +323,15 @@ implementation
 {$ifdef WIN32}
   {$R barcode.d32}
 {$else}
+{$ifdef WIN64}
+  {$R barcode.d32}
+{$else}
   {$R barcode.d16}
+{$endif}
 {$endif}
 
 
-uses WinProcs, WinTypes, SysUtils, bcchksum,
+uses WinProcs, WinTypes, SysUtils, asbcchksum,
    math;
 
 
@@ -381,6 +385,7 @@ const BCdata:array[bcCode_2_5_interleaved..bcCodeEAN128C] of TBCdata =
   );
 
 {$ifndef WIN32}
+{$ifndef WIN64}
 function Trim(const S: string): string; export;
 { Removes leading and trailing whitespace from s}
 var
@@ -395,6 +400,7 @@ begin
    Result := Copy(S, I, L - I + 1);
   end;
 end;
+{$endif}
 {$endif}
 
 
@@ -1014,7 +1020,7 @@ function TAsBarcode.Code_39:string;
 type TCode39 =
   record
     c : char;
-    data : array[0..9] of char;
+    data : string;
     chk: shortint;
   end;
 
@@ -1117,7 +1123,7 @@ end;
 
 function TAsBarcode.Code_39Extended:string;
 
-const code39x : array[0..127] of string[2] =
+const code39x : array[0..127] of string =
   (
   ('%U'), ('$A'), ('$B'), ('$C'), ('$D'), ('$E'), ('$F'), ('$G'),
   ('$H'), ('$I'), ('$J'), ('$K'), ('$L'), ('$M'), ('$N'), ('$O'),
@@ -1163,8 +1169,8 @@ function TAsBarcode.Code_128:string;
 type TCode128 =
   record
     a, b : char;
-    c : string[2];
-    data : string[6];
+    c : string;
+    data : string;
   end;
 
 const tabelle_128: array[0..102] of TCode128 = (
@@ -1524,7 +1530,7 @@ end;
 
 
 function TAsBarcode.Code_93Extended:string;
-const code93x : array[0..127] of string[2] =
+const code93x : array[0..127] of string =
   (
   (']U'), ('[A'), ('[B'), ('[C'), ('[D'), ('[E'), ('[F'), ('[G'),
   ('[H'), ('[I'), ('[J'), ('[K'), ('[L'), ('[M'), ('[N'), ('[O'),
@@ -1569,7 +1575,7 @@ end;
 
 
 function TAsBarcode.Code_MSI:string;
-const tabelle_MSI:array['0'..'9'] of string[8] =
+const tabelle_MSI:array['0'..'9'] of string =
   (
   ( '51515151' ),    {'0'}
   ( '51515160' ),    {'1'}
@@ -1615,7 +1621,7 @@ end;
 
 
 function TAsBarcode.Code_PostNet:string;
-const tabelle_PostNet:array['0'..'9'] of string[10] =
+const tabelle_PostNet:array['0'..'9'] of string =
   (
   ( '5151A1A1A1' ),    {'0'}
   ( 'A1A1A15151' ),    {'1'}
@@ -1645,7 +1651,7 @@ function TAsBarcode.Code_Codabar:string;
 type TCodabar =
   record
     c : char;
-    data : array[0..6] of char;
+    data : string;
   end;
 
 const tabelle_cb: array[0..19] of TCodabar = (

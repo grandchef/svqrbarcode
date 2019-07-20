@@ -132,9 +132,9 @@ type
     property Text: string Read GetText Write SetText;
   public
     { Public declarations }
-    procedure print(OfsX, OfsY: integer); override;
-    procedure paint; override;
-    procedure loaded; override;
+    procedure Print(OfsX, OfsY: integer); override;
+    procedure Paint; override;
+    procedure Loaded; override;
     procedure Resize; override;
     constructor Create(aOwner: TComponent); override;
   published
@@ -181,7 +181,7 @@ type
     Field:      TField;
     FieldNo:    integer;
     CorrectField: boolean;
-    DataSourceName: string[30];
+    DataSourceName: string;
     FDataSet:   TDataSet;
     FDataField: string;
     FPrefix: string;
@@ -193,7 +193,7 @@ type
     procedure DefineProperties(Filer: TFiler); override;
     procedure Prepare; override;
     procedure ReadValues(Reader: TReader); virtual;
-    procedure Unprepare; override;
+    procedure UnPrepare; override;
     procedure WriteValues(Writer: TWriter); virtual;
 
   public

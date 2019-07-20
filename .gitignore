@@ -1,0 +1,6 @@
+Win64/
+Win32/
+**.dproj.local
+**.identcache
+**.stat
+**.groupproj.local

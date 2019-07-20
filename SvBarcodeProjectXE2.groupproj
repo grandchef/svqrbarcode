@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{D804B18C-39C8-4DD3-9701-F472351A3E8D}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="SvQrBarcodeXE2.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DCLSvQrBarcodeXE2.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="SvQrBarcodeXE2">
+			<MSBuild Projects="SvQrBarcodeXE2.dproj"/>
+		</Target>
+		<Target Name="SvQrBarcodeXE2:Clean">
+			<MSBuild Targets="Clean" Projects="SvQrBarcodeXE2.dproj"/>
+		</Target>
+		<Target Name="SvQrBarcodeXE2:Make">
+			<MSBuild Targets="Make" Projects="SvQrBarcodeXE2.dproj"/>
+		</Target>
+		<Target Name="DCLSvQrBarcodeXE2">
+			<MSBuild Projects="DCLSvQrBarcodeXE2.dproj"/>
+		</Target>
+		<Target Name="DCLSvQrBarcodeXE2:Clean">
+			<MSBuild Targets="Clean" Projects="DCLSvQrBarcodeXE2.dproj"/>
+		</Target>
+		<Target Name="DCLSvQrBarcodeXE2:Make">
+			<MSBuild Targets="Make" Projects="DCLSvQrBarcodeXE2.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="SvQrBarcodeXE2;DCLSvQrBarcodeXE2"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="SvQrBarcodeXE2:Clean;DCLSvQrBarcodeXE2:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="SvQrBarcodeXE2:Make;DCLSvQrBarcodeXE2:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>
