@@ -493,7 +493,7 @@ procedure TSvQRDBBarcode.Print(OfsX, OfsY: integer);
  begin
   if CorrectField then
     begin
-    if FDataSet.DefaultFields then
+    if not (lcPersistent in FDataSet.Fields.LifeCycles) then
       Field := FDataSet.Fields[FieldNo];
     end
   else
